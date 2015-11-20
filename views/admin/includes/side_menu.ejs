@@ -1,0 +1,65 @@
+<div class="side-menu">
+    <div class="sidebar-menu">
+        <ul>
+            <% 
+                var sideMenu = [
+                    {name: '基础平台', icon: 'icon-dashboard', url: '/admin', menu: 'admin_index'},
+                    {name: '内容管理', icon: 'icon-file', url: '/admin/post', menu: 'admin_post'},
+                    {name: '留言管理', icon: 'icon-comments', url: '/admin/message', menu: 'admin_message'},
+                    {name: '标签管理', icon: 'icon-tags', url: '/admin/tag', menu: 'admin_tag'},
+                    {name: '广告管理', icon: 'icon-coffee', url: '/admin/ads', menu: 'admin_ads'},
+                    {name: '用户管理', icon: 'icon-group', url: '/admin/user', menu: 'admin_user'},
+                    {name: '统计分析', icon: 'icon-bar-chart', url: '/admin/stat', menu: 'admin_stat'},
+                    {name: '系统管理', icon: 'icon-cogs', url: '/admin/system', menu: 'admin_system'}
+                    ] 
+                sideMenu.forEach(function (item) {
+            %>
+            <li class="has_sub">
+                <a href="<%= item.url %>" class="<%- item.menu == context.menu ? 'active' : '' %>">
+                    <i class="<%= item.icon %>"></i><span><%= item.name %></span>
+                </a>
+            </li>
+            <%  }); %>
+            <!-- <li class="has_sub">
+                <a href="/admin">
+                    <i class="icon-dashboard"></i><span>基础平台</span>
+                </a>
+            </li> -->
+            <!-- <li class="has_sub">
+                <a href="/admin/post">
+                    <i class="icon-file"></i><span>内容管理</span>
+                </a>
+            </li> -->
+            <!-- <li class="has_sub">
+                <a href="/admin/message">
+                    <i class="icon-comments"></i><span>留言管理</span>
+                </a>
+            </li> -->
+            <!-- <li class="has_sub">
+                <a href="/admin/tag" class="active">
+                    <i class="icon-tags"></i><span>标签管理</span>
+                </a>
+            </li> -->
+            <!-- <li class="has_sub">
+                <a href="/admin/ads">
+                    <i class="icon-coffee"></i><span>广告管理</span>
+                </a>
+            </li> -->
+            <!-- <li class="has_sub">
+                <a href="/admin/user">
+                    <i class="icon-group"></i><span>用户管理</span>
+                </a>
+            </li> -->
+            <!-- <li class="has_sub">
+                <a href="/admin/stat">
+                    <i class="icon-bar-chart"></i><span>统计分析</span>
+                </a>
+            </li> -->
+            <!-- <li class="has_sub">
+                <a href="/admin/system">
+                    <i class="icon-cogs"></i><span>系统管理</span>
+                </a>
+            </li> -->
+        </ul>
+    </div>
+</div>
