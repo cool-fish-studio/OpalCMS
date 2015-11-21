@@ -1,11 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% include header %>
+<div class="respond">
+    <div class="respond-title">
+        <p>留言请输入昵称和邮箱</p>
+    </div>
+    <div class="respond-body">
+        <form method="get" class="">
+            <div class="row">
+                <div class="col-sm-6 padding-right-10px">
+                    <input class="form-control" type="text" placeholder="Name" name="name">
+                </div>
+                <div class="col-sm-6 padding-left-10px">
+                    <input class="form-control" type="text" placeholder="Email" name="email">
+                </div>
+                <div class="col-sm-12">
+                    <textarea class="form-textarea" name="comment" rows="10" tabindex="4" placeholder="输入留言内容..."></textarea>
+                </div>
+                <div class="form-input">
+                    <button class="btn-submit fr" type="submit">提交留言</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<% include footer %>            
