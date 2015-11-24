@@ -21,7 +21,7 @@
                             {name: '文章', url: '/books', menu: 'books'},
                             {name: '作品', url: '/works', menu: 'works'},
                             {name: '留言', url: '/message', menu: 'message'}
-                            ] 
+                            ];
                         menus.forEach(function (item) {
                     %>
                     <li>
@@ -39,9 +39,10 @@
                     {name: '记事本', describe: '人生,从外打破,是压力；从内打破,是成长。', className: 'books-bg', menu: 'books'},
                     {name: '作品集', describe: '不会做菜的玩家，不是好程序员。', className: 'works-bg', menu: 'works'},
                     {name: '留言板', describe: '留下你的话语，带走我的问候，欢迎大家没事踩踩。', className: 'message-bg', menu: 'message'}
-                    ] 
-                banners.forEach(function (item) {
-                    if (item.menu == context.menu) {
+                    ];
+                if (context.isShowBanner === true) {
+                    banners.forEach(function (item) {
+                        if (item.menu == context.menu) {
             %>
             <div class="banner-panel <%- item.className %>">
                 <div class="banner">
@@ -53,5 +54,5 @@
                     </div>
                 </div>
             </div>
-            <%  }}); %>
+            <%      }})}; %>
             <div class="center-panel">
