@@ -1,0 +1,72 @@
+<% locals.menu = 'admin_content'; %>
+<% include ../../includes/content_header %>
+<div class="card-box">
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-6">
+                内容管理
+            </div>
+            <div class="col-sm-6">
+                <div class="button-list text-right">
+                    <a class="btn btn-create" href="/admin/content">
+                        <i class="icon-reply"></i>返回列表
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <form action="/admin/content/work/create" method="POST" enctype='multipart/form-data'>
+            <div class="row form-panel">
+                <div class="col-sm-6 row">
+                    <input class="form-control" type="text" placeholder="请输入作品名称" name="title">
+                    <input type="file" class="form-control" name="themesImage" accept="image/*" required>
+                    <select class="form-control" name="category">
+                        <option value="0">请选择类别</option>
+                        <% locals.context.categorys.forEach(function (category) { %>
+                        <option value="<%- category._id %>"><%= category.name %></option>
+                        <% }) %>
+                    </select>
+
+                    <select class="form-control" name="tag">
+                        <option value="0">请选择标签</option>
+                        <% locals.context.tags.forEach(function (tag) { %>
+                        <option value="<%- tag._id %>"><%= tag.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-description">
+                        <input class="form-control" type="text" placeholder="请输入作品关键字" name="keywords">
+                        <textarea class="form-control" name="discription" rows="10" tabindex="4" placeholder="请输入作品描述"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <input class="form-control" type="text" placeholder="请输入作品访问地址" name="previewPath">
+                    <div id="content" class="content-box"></div>
+                    <div class="form-input clearfix">
+                        <button class="btn-submit fr" type="submit">创建作品外链</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<% include ../../includes/content_footer %>
+<script type="text/javascript">
+    $('#content').trumbowyg({
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['viewHTML',
+            '|', 'formatting',
+            '|', 'bold', 'em', 'del', 'underline', 'horizontalRule',
+            '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
+            '|', 'btnGrp-lists',
+            '|', 'image', 'link']
+    });
+</script>
+

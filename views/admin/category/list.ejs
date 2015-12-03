@@ -1,0 +1,51 @@
+<% locals.menu = 'admin_category'; %>
+<% include ../includes/content_header %>
+<div class="card-box">
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-6">
+                类别管理
+            </div>
+            <div class="col-sm-6">
+                <div class="button-list text-right">
+                    <a class="btn btn-create" href="/admin/category/create">
+                        <i class="icon-magic"></i>创建类别
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <div class="content-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>权重</th>
+                        <th>名称</th>
+                        <th>创建时间</th>
+                        <th class="actions">管理</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% 
+                        var categorys = locals.context.categorys.list || [];
+                        categorys.forEach(function (category)
+                        { 
+                    %>
+                    <tr>
+                        <td><%- category.weight %></td>
+                        <td><%- category.name %></td>
+                        <td><%- locals.viewHelper.dateFormat(category.createdAt, 'yyyy-MM-dd hh:mm') %></td>
+                        <td class="actions">
+                            <a href="/admin/category/<%- category.id %>/update" class="text-update"><i class="icon-pencil"></i></a>
+                            <a href="/admin/category/<%- category.id %>/remove" class="text-remove"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <%- include('../includes/pagination', {'url': '/admin/category', 'pagination': locals.context.categorys.meta}) %>
+    </div>
+</div>
+<% include ../includes/content_footer %>

@@ -1,0 +1,52 @@
+<% include header %>
+<div class="respond">
+    <div class="respond-body">
+        <% if (locals.context.contents.meta.total == 0) { %>
+        <span class="nodata">暂无内容</span>
+        <% } %>
+        <% console.log(locals.context.contents.meta.total) %>
+        <ul class="row post-box">
+            <% locals.context.contents.list.forEach(function (content) { %>
+            <li class="post-list">
+                <div class="post-card">
+                    <div class="post-thumbnail">
+                        <a href="/<%- content.type %>/<%- content.id %>">
+                            <div class="overlay">
+                                <span class="icon-screenshot"></span>
+                            </div>
+                            <p class="dealcard-category"><%- content.category.name %></p>
+                            <div class="post-meta">
+                                <h5>
+                                    <%- content.totalClick %>次查阅 
+                                    <span><%- content.totalComment %>次评论</span>
+                                </h5>
+                                <span>/<%- locals.viewHelper.dateFormat(content.createdAt, 'dd') %></span>
+                                <span>/<%- locals.viewHelper.dateFormat(content.createdAt, 'MM') %></span>
+                                <span><%- locals.viewHelper.dateFormat(content.createdAt, 'yyyy') %></span>
+                            </div>
+                            <img src="<%- content.themesImage %>" height="200">
+                        </a>
+                    </div>
+                    <div class="post-body">
+                        <h2 class="post-title">
+                            <a href="/<%- content.type %>/<%- content.id %>">
+                                <%- content.title %>
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="post-footer">
+                        <a href="/<%- content.type %>/<%- content.id %>" class="fr text-info">继续阅读 »</a>
+                        <span class="tags-links">
+                            <% content.tags.forEach(function (tag) { %>
+                            <a href="javascript:;"><%- tag.name %></a>
+                            <% }) %>
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <% }) %>
+            
+        </ul>
+    </div>
+</div>
+<% include footer %>

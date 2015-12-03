@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title><%- locals.SITENAME %></title>
+        <link rel="stylesheet" type="text/css" href="/css/CFS.Animate.min.css">
+        <style type="text/css">
+        *{margin: 0;padding: 0;}
+        body,html{height: 100%;background-color:#F7F6F2;font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;color:#407700;text-align: center;padding: 120px;}
+        .activate_h1{font-size: 2.5em;}
+        .activate_h3{font-size: 1.2em;}
+        </style>
+    </head>
+    <body>
+        <% if (!locals.context.formErrors) { %>
+            <div class="activate_h1 cfs_curveInUp">恭喜，您的账户 <%- locals.context.user.email %> <br>激活成功 </div>
+            <div class="activate_h3 cfs_curveInUp" id="showTime"></div>
+            <script type="text/javascript">
+                var t = 3; // 设定跳转的时间
+                setInterval('refer()', 1000); // 启动1秒定时
+                function refer(){ 
+                    if(t == 0){
+                        location = 'http://www.coolfishstudio.com/'; // 设定跳转的链接地址
+                    }
+                    document.getElementById('showTime').innerHTML = '' + t + "秒后跳转到酷鱼网"; // 显示倒计时
+                    t--; // 计数器递减
+                }
+            </script>
+        <% } else { %>
+            <div class="activate_h1 cfs_curveInUp">抱歉，您的账户 <%- locals.context.formErrors %> 激活失败。 </div>
+            <div class="activate_h3 cfs_curveInUp">失败原因：
+            	<% for (var field in locals.context.formErrors) { -%>
+                    <%= locals.context.formErrors[field].msg %><br>
+                <% } -%>
+            </div>
+        <% } %>
+    </body>
+</html>
+
+

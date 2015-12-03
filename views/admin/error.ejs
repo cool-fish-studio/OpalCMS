@@ -1,0 +1,15 @@
+<% include ./includes/content_header %>
+<div class="error-page">
+    <h1 class="error-code text-red">Error <%= error.status %></h1>
+    <% 
+        var errorMessage = {
+            403: 'The request was a legal request, but the server is refusing to respond to it',
+            404: 'Oops! The requested page could not be found',
+            405: 'A request was made of a page using a request method not supported by that page',
+            500: 'A generic error message, given when no more specific message is suitable.',
+            503: 'The server is currently unavailable (overloaded or down)'
+        }; 
+    %>
+    <p class="error-description"><%- errorMessage[error.status] %></p>
+</div>
+<% include ./includes/content_footer %>

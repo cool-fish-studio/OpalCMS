@@ -1,0 +1,37 @@
+<% locals.menu = 'admin_category'; %>
+<% include ../includes/content_header %>
+<div class="card-box">
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-6">
+                类别管理
+            </div>
+            <div class="col-sm-6">
+                <div class="button-list text-right">
+                    <a class="btn btn-create" href="/admin/category">
+                        <i class="icon-reply"></i>返回列表
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <form action="/admin/category/create" method="POST">
+            <div class="row form-panel">
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" placeholder="请输入类别名称" name="name">
+                    <input class="form-control" type="text" placeholder="请输入类别权重" name="weight">
+                    <div class="form-input clearfix">
+                        <button class="btn-submit fr" type="submit">创建类别</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-description">
+                        说实话实话实说
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<% include ../includes/content_footer %>

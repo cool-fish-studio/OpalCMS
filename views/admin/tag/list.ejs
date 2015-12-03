@@ -1,3 +1,4 @@
+<% locals.menu = 'admin_tag'; %>
 <% include ../includes/content_header %>
 <div class="card-box">
     <div class="card-title">
@@ -7,9 +8,9 @@
             </div>
             <div class="col-sm-6">
                 <div class="button-list text-right">
-                    <button type="button" class="btn btn-create">
+                    <a class="btn btn-create" href="/admin/tag/create">
                         <i class="icon-magic"></i>创建标签
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -19,126 +20,32 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>名称</th>
                         <th>权重</th>
+                        <th>名称</th>
+                        <th>创建时间</th>
                         <th class="actions">管理</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <% 
+                        var tags = locals.context.tags.list || [];
+                        tags.forEach(function (tag)
+                        { 
+                    %>
                     <tr>
-                        <td>1</td>
-                        <td>html5</td>
-                        <td>3</td>
+                        <td><%- tag.weight %></td>
+                        <td><%- tag.name %></td>
+                        <td><%- locals.viewHelper.dateFormat(tag.createdAt, 'yyyy-MM-dd hh:mm') %></td>
                         <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
+                            <a href="/admin/tag/<%- tag.id %>/update" class="text-update"><i class="icon-pencil"></i></a>
+                            <a href="/admin/tag/<%- tag.id %>/remove" class="text-remove"><i class="icon-trash"></i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>css3</td>
-                        <td>5</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Node.js</td>
-                        <td>7</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>html5</td>
-                        <td>3</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>css3</td>
-                        <td>5</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Node.js</td>
-                        <td>7</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>html5</td>
-                        <td>3</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>css3</td>
-                        <td>5</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Node.js</td>
-                        <td>7</td>
-                        <td class="actions">
-                            <a href="#" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="#" class="text-remove"><i class="icon-trash"></i></a>
-                        </td>
-                    </tr>
-
+                    <% }); %>
                 </tbody>
             </table>
         </div>
-        <div class="content-page text-right">
-            <ul class="pagination">
-                <li class="disabled">
-                    <span>首页</span>
-                </li>
-                <li class="active">
-                    <span>1</span>
-                </li>
-                <li class="">
-                    <a href="#">2</a>
-                </li>
-                <li class="">
-                    <a href="#">3</a>
-                </li>
-                <li class="">
-                    <a href="#">4</a>
-                </li>
-                <li class="">
-                    <a href="#">5</a>
-                </li>
-                <li class="">
-                    <a href="#">6</a>
-                </li>
-                <li class="">
-                    <a href="#">尾页</a>
-                </li>
-            </ul>
-        </div>
+        <%- include('../includes/pagination', {'url': '/admin/tag', 'pagination': locals.context.tags.meta}) %>
     </div>
 </div>
 <% include ../includes/content_footer %>

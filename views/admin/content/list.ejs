@@ -1,0 +1,61 @@
+<% locals.menu = 'admin_content'; %>
+<% include ../includes/content_header %>
+<div class="card-box">
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-6">
+                内容管理
+            </div>
+            <div class="col-sm-6">
+                <div class="button-list text-right">
+                    <a class="btn btn-create" href="/admin/content/post/create">
+                        <i class="icon-magic"></i>发表文章
+                    </a>
+                    <a class="btn btn-create" href="/admin/content/work/create">
+                        <i class="icon-magic"></i>发表作品
+                    </a>
+                    <a class="btn btn-create" href="/admin/content/plugin/create">
+                        <i class="icon-magic"></i>发表插件
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-content">
+        <div class="content-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>类别</th>
+                        <th>内容类型</th>
+                        <th>总浏览/总评论/总点赞</th>
+                        <th>创建时间</th>
+                        <th class="actions">管理</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% 
+                        var contents = locals.context.contents.list || [];
+                        contents.forEach(function (content)
+                        { 
+                    %>
+                    <tr>
+                        <td><%- content.title %></td>
+                        <td><%- content.category.name %></td>
+                        <td><%- locals.viewHelper.contentType(content.type) %></td>
+                        <td><%- content.totalClick %>/<%- content.totalComment %>/<%- content.totalLike %></td>
+                        <td><%- locals.viewHelper.dateFormat(content.createdAt, 'yyyy-MM-dd hh:mm') %></td>
+                        <td class="actions">
+                            <a href="/admin/content/<%- content.id %>/update" class="text-update"><i class="icon-pencil"></i></a>
+                            <a href="/admin/content/<%- content.id %>/remove" class="text-remove"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <%- include('../includes/pagination', {'url': '/admin/content', 'pagination': locals.context.contents.meta}) %>
+    </div>
+</div>
+<% include ../includes/content_footer %>

@@ -1,3 +1,26 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% include header %>
+<div class="respond">
+    <div class="respond-body">
+        <div class="error-page">
+            <h1 class="error-code text-red">Error <%= error.status %></h1>
+            <% 
+                var errorMessage = {
+                    403: 'The request was a legal request, but the server is refusing to respond to it',
+                    404: 'Oops! The requested page could not be found',
+                    405: 'A request was made of a page using a request method not supported by that page',
+                    500: 'A generic error message, given when no more specific message is suitable.',
+                    503: 'The server is currently unavailable (overloaded or down)'
+                }; 
+            %>
+            <p class="error-description"><%- errorMessage[error.status] %></p>
+            <a href="/" class="btn btn-create">
+                <i class="icon-circle-arrow-left"></i> 前往首页
+            </a>
+            <a href="/message" class="btn btn-create">
+                我要吐槽 <i class="icon-circle-arrow-right"></i>
+            </a>
+            <!-- <pre><%= error.stack %></pre> -->
+        </div>
+    </div>
+</div>
+<% include footer %>

@@ -1,4 +1,13 @@
 <% include header %>
+<% 
+    var content = locals.context.content; 
+    var categorys = locals.context.categorys; 
+    var contentName = {
+        'post' : '文章',
+        'work' : '作品',
+        'plugin' : '插件'
+    };
+%>
 <div class="respond">
     <div class="respond-body article-box">
         <div class="article-panel">
@@ -7,29 +16,24 @@
                     <img src="/images/timthumb/test4.jpg">
                 </div>
                 <div class="article-header">
-                    <h1 class="article-title">我是标题标题标题标题</h1>
+                    <h1 class="article-title"><%- content.title %></h1>
                     <div class="article-meta">
-                        <time class="article-date">2015-11-09</time> • 
+                        <time class="article-date"><%- locals.viewHelper.dateFormat(content.createdAt, 'yyyy-MM-dd hh:mm') %></time> • 
                         <span>
-                            <a href="javascript:;">HTML5</a>
+                            <a href="javascript:;"><%- content.category.name %></a>
                         </span> • 
-                        <span>55次浏览</span> • 
-                        <a href="javascript:;">3条评论</a>
+                        <span><%- content.totalClick %>次浏览</span> • 
+                        <a href="javascript:;"><%- content.totalComment %>条评论</a>
                     </div>
                 </div>
                 <div class="article-content">
-                    <p>这是您在 WeCenter 社交化问答社区程序 上的重要邮件, 功能是进行 WeCenter 社交化问答社区程序 帐户邮箱验证, 请点击下面的连接完成验证</p>
-                    <p>这是您在 WeCenter 社交化问答社区程序 上的重要邮件, 功能是进行 WeCenter 社交化问答社区程序 帐户邮箱验证, 请点击下面的连接完成验证</p>
-                    <h2>1213123</h2>
-                    <p>这是您在 WeCenter 社交化问答社区程序 上的重要邮件, 功能是进行 WeCenter 社交化问答社区程序 帐户邮箱验证, 请点击下面的连接完成验证</p>
-                    <p>这是您在 WeCenter 社交化问答社区程序 上的重要邮件, 功能是进行 WeCenter 社交化问答社区程序 帐户邮箱验证, 请点击下面的连接完成验证</p>
-                    <p>这是您在 WeCenter 社交化问答社区程序 上的重要邮件, 功能是进行 WeCenter 社交化问答社区程序 帐户邮箱验证, 请点击下面的连接完成验证</p>
-                    <p>这是您在 WeCenter 社交化问答社区程序 上的重要邮件, 功能是进行 WeCenter 社交化问答社区程序 帐户邮箱验证, 请点击下面的连接完成验证</p>
-                    <p>这是您在 WeCenter 社交化问答社区程序 上的重要邮件, 功能是进行 WeCenter 社交化问答社区程序 帐户邮箱验证, 请点击下面的连接完成验证</p>
+                    <%- content.content %>
                 </div>
                 <div class="article-footer">
                     <span class="tags-links">
-                        <a href="javascript:;">HTML5</a>
+                        <% content.tags.forEach(function (tag) { %>
+                        <a href="javascript:;"><%- tag.name %></a>
+                        <% }) %>
                     </span>
                     <a class="like" href="javascript:;">
                         <span class="heart"></span>
@@ -88,23 +92,16 @@
         </div>
         <div class="article-sidebar">
             <section>
-                <h3>文章分类</h3>
+                <h3><%- contentName[content.type] %>分类</h3>
                 <ul>
+                    <% categorys.forEach(function (category){ %>
                     <li class="classify-item">
-                        <a href="javascript:;">HTML5</a>2
+                        <a href="javascript:;"><%- category.name %></a>
                     </li>
-                    <li class="classify-item">
-                        <a href="javascript:;">前端特效</a>4
-                    </li>
-                    <li class="classify-item">
-                        <a href="javascript:;">CSS3</a>5
-                    </li>
-                    <li class="classify-item">
-                        <a href="javascript:;">Node.js</a>19
-                    </li>
+                    <% }); %>
                 </ul>
             </section>
-            <section>
+            <!-- <section>
                 <h3>热门文章</h3>
                 <ul>
                     <li>
@@ -162,7 +159,7 @@
                         </a>
                     </li>
                 </ul>
-            </section>
+            </section> -->
         </div>
     </div>
 </div>

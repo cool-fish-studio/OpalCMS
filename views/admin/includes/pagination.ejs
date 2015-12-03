@@ -1,0 +1,54 @@
+<div class="content-page text-right">
+    <%
+        var currentPage = parseInt(pagination.offset / pagination.limit + 1, 10) || 1;
+        var totalPages = Math.ceil(pagination.total / pagination.limit) || 1;
+        if (totalPages > 1) {
+    %>
+    <ul class="pagination">
+        <li class="<% currentPage < 2 ? 'disabled' : '' %> ">
+            <% if (currentPage < 2) { %>
+                <span>首页</span>
+            <% } else { %>
+                <a href="<%- url %>">首页</a>
+            <% } %>
+        </li>
+        <%
+            var startNum = 1;
+            var endNum = 1;
+            if (totalPages <= 5) {
+                startNum = 1;
+                endNum = totalPages;
+            } else {
+                if (currentPage <= 3) {
+                    startNum = 1;
+                    endNum = 5;
+                } else if (currentPage <= totalPages - 3) {
+                    startNum = currentPage - 2;
+                    endNum = currentPage + 2;
+                } else {
+                    startNum = totalPages - 4;
+                    endNum = totalPages;
+                }
+            }
+            for (var i = startNum; i <= endNum; i++) {
+        %>
+            <% if (currentPage == i) { %>
+                <li class="active">
+                    <span><%- i %></span>
+                </li>
+            <% } else { %>
+                <li class="">
+                    <a href="<%- url + '?p=' + i %>"><%- i %></a>
+                </li>
+            <% } %>
+        <% } %>
+        <li class="<% currentPage >= totalPages ? 'disabled' : '' %> ">
+            <% if (currentPage >= totalPages) { %>
+                <span>尾页</span>
+            <% } else { %>
+                <a href="<%- url + '?p=' + totalPages %>">尾页</a>
+            <% } %>
+        </li>
+    </ul>
+    <% } %>
+</div>
