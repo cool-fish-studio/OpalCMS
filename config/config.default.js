@@ -12,7 +12,7 @@ module.exports = {
     },
     HOST: 'http://www.coolfishstudio.com',
     MONGO: {
-        URL: 'mongodb://127.0.0.1:27017/coolfish',
+        URL: 'mongodb://127.0.0.1:27017/opalcms',
     },
     UPLOAD_PATH: './public/images/timthumb',
     ADMIN: {
