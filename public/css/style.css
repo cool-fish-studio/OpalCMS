@@ -36,13 +36,13 @@ h6{font-size: 12px}
 .col-sm-2{float:left;width:16.66666667%}
 .col-sm-1{float:left;width:8.33333333%}
 
-.text-custom{color: #5fbeaa;}
-.text-info{color: #33b86c;}
-.text-create{color: #5fbeaa;}
-.text-update{color: #29b6f6;}
-.text-remove{color: #dd4b39;}
-.text-white{color: #fff;}
-.text-red{color: #bf1e4b;}
+.text-custom{color: #5fbeaa!important;}
+.text-info{color: #33b86c!important;}
+.text-create{color: #5fbeaa!important;}
+.text-update{color: #29b6f6!important;}
+.text-remove{color: #dd4b39!important;}
+.text-white{color: #fff!important;}
+.text-red{color: #bf1e4b!important;}
 
 .padding-left-10px{padding-left: 10px;}
 .padding-right-10px{padding-right: 10px;}
@@ -68,9 +68,9 @@ h6{font-size: 12px}
 .btn:hover{background-color: #78D2BF;}
 .btn-bottom{margin-bottom: 10px;}
 .btn i{margin-right: 6px;}
-.btn-create{background-color: #5fbeaa;}
-.btn-update{background-color: #29b6f6;}
-.btn-remove{background-color: #dd4b39;}
+.btn-create{background-color: #5fbeaa!important;}
+.btn-update{background-color: #29b6f6!important;}
+.btn-remove{background-color: #dd4b39!important;}
 
 .account-pages{background:url(../images/bg-login.jpg) no-repeat center top;background-size: cover;position:absolute;height:100%;width:100%}
 .account-pages-cover{position: absolute;width: 100%;height: 100%;background-color:rgba(54,61,76,0.4);}
@@ -267,3 +267,5 @@ tbody{color: #797979;}
 
 .dealcard-category{position: absolute;z-index: 1;font-size: 12px;background: #33b86c;color: #fff;padding: 2px 30px;position: absolute;text-align: center;transform: rotateZ(-45deg);-webkit-transform: rotateZ(-45deg);-moz-transform: rotateZ(-45deg);-ms-transform: rotateZ(-45deg);-o-transform: rotateZ(-45deg);left: -28px;top: 16px;}
 
+.path-btn{display: block;margin: 10px 20px 0 0;text-align: center;background-color: #333;padding: 20px;border-radius: 3px;color: #fff;}
+.path-btn:hover{box-shadow: 1px 1px 1px #76777B;};

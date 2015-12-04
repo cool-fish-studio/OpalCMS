@@ -29,3 +29,5 @@ node_modules
 .DS_Store
 
 config/config_current.js
+
+public/images/timthumb/

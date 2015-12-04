@@ -91,6 +91,19 @@
             </div>
         </div>
         <div class="article-sidebar">
+            <% if (content.type !== 'post') { %>
+            <section>
+                <% if (content.previewPath) { %>
+                <a href="<%- content.previewPath %>" class="path-btn btn-create"><%- contentName[content.type] %>演示</a>
+                <% } %>
+                <% if (content.downPath) { %>
+                <a href="<%- content.downPath %>" class="path-btn btn-remove"><%- contentName[content.type] %>下载</a>
+                <% } %>
+                <% if (content.repositoryPath) { %>
+                <a href="<%- content.repositoryPath %>" class="path-btn btn-update"><%- contentName[content.type] %>仓库</a>
+                <% } %>
+            </section>
+            <% } %>
             <section>
                 <h3><%- contentName[content.type] %>分类</h3>
                 <ul>
