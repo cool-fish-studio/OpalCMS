@@ -1,4 +1,7 @@
-<% locals.menu = 'admin_content'; %>
+<% 
+    locals.menu = 'admin_content'; 
+    var content = locals.context.content;
+%>
 <% include ../../includes/content_header %>
 <div class="card-box">
     <div class="card-title">
@@ -16,18 +19,46 @@
         </div>
     </div>
     <div class="card-content">
-        <form action="/admin/content/<%= locals.context.content.id %>/update" method="POST">
+        <form action="/admin/content/<%= content.type %>/<%= content.id %>/update" method="POST" enctype='multipart/form-data'>
             <div class="row form-panel">
-                <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="请输入内容名称" name="name" value="<%= locals.context.content.name || '' %>">
-                    <input class="form-control" type="text" placeholder="请输入内容权重" name="weight" value="<%= locals.context.content.weight || '' %>">
-                    <div class="form-input clearfix">
-                        <button class="btn-submit fr" type="submit">修改内容</button>
-                    </div>
+                <div class="col-sm-6 row">
+                    <input class="form-control" type="text" placeholder="请输入插件名称" name="title" value="<%= content.title %>">
+                    <input type="file" class="form-control" name="themesImage" accept="image/*">
+                    <select class="form-control" name="category" value="<%= content.category %>">
+                        <option value="0">请选择类别</option>
+                        <% locals.context.categorys.forEach(function (category) { %>
+                            <% if (content.category.id == category.id) { %>
+                            <option value="<%- category.id %>" selected = "selected"><%= category.name %></option>
+                            <% } else { %>
+                            <option value="<%- category.id %>"><%= category.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select>
+
+                    <select class="form-control" name="tag" value="<%= content.tag %>">
+                        <option value="0">请选择标签</option>
+                        <% locals.context.tags.forEach(function (tag) { %>
+                            <% if (content.tags[0].id == tag.id) { %>
+                            <option value="<%- tag.id %>" selected = "selected"><%= tag.name %></option>
+                            <% } else { %>
+                            <option value="<%- tag.id %>"><%= tag.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-description">
-                        说实话实话实说
+                        <input class="form-control" type="text" placeholder="请输入插件关键字" name="keywords" value="<%= content.keywords %>">
+                        <textarea class="form-control" name="discription" rows="10" tabindex="4" placeholder="请输入插件描述"><%= content.discription %></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <input class="form-control" type="text" placeholder="请输入插件访问地址" name="previewPath" value="<%= content.previewPath %>">
+                    <input class="form-control" type="text" placeholder="请输入插件下载地址" name="downPath" value="<%= content.downPath %>">
+                    <input class="form-control" type="text" placeholder="请输入插件仓库地址" name="repositoryPath" value="<%= content.repositoryPath %>">
+                    <div id="content" class="content-box"><%- content.content %></div>
+                    <div class="form-input clearfix">
+                        <button class="btn-submit fr" type="submit">修改内容</button>
                     </div>
                 </div>
             </div>
@@ -35,3 +66,19 @@
     </div>
 </div>
 <% include ../../includes/content_footer %>
+<script type="text/javascript">
+    $('#content').trumbowyg({
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['viewHTML',
+            '|', 'formatting',
+            '|', 'bold', 'em', 'del', 'underline', 'horizontalRule',
+            '|', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
+            '|', 'btnGrp-lists',
+            '|', 'image', 'link']
+    });
+</script>

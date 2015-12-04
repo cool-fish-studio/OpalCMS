@@ -47,8 +47,8 @@
                         <td><%- content.totalClick %>/<%- content.totalComment %>/<%- content.totalLike %></td>
                         <td><%- locals.viewHelper.dateFormat(content.createdAt, 'yyyy-MM-dd hh:mm') %></td>
                         <td class="actions">
-                            <a href="/admin/content/<%- content.id %>/update" class="text-update"><i class="icon-pencil"></i></a>
-                            <a href="/admin/content/<%- content.id %>/remove" class="text-remove"><i class="icon-trash"></i></a>
+                            <a href="/admin/content/<%- content.type %>/<%- content.id %>/update" class="text-update"><i class="icon-pencil"></i></a>
+                            <a href="/admin/content/<%- content.type %>/<%- content.id %>/remove" class="text-remove"><i class="icon-trash"></i></a>
                         </td>
                     </tr>
                     <% }); %>
