@@ -226,7 +226,7 @@ tbody{color: #797979;}
 .article-sidebar section ul li.classify-item a{float:left;display:block}
 .article-main{margin-bottom:20px;overflow:hidden;border-radius:4px;background-color:#fff;border:1px solid #E3E3E3}
 .article-cover{position:relative;display:block;overflow:hidden}
-.article-cover img{width:100%;display:block;min-height:200px;max-height:220px;background-color:#fff}
+.article-cover img{width:100%;display:block;min-height:360px;max-height:360px;background-color:#fff}
 .article-header{overflow:hidden;margin:15px 20px}
 .article-title{margin:0;font-weight:400;font-size:30px;color:#3d4b66}
 .article-meta{margin-top:7px}
