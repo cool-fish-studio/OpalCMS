@@ -268,4 +268,12 @@ tbody{color: #797979;}
 .dealcard-category{position: absolute;z-index: 1;font-size: 12px;background: #33b86c;color: #fff;padding: 2px 30px;position: absolute;text-align: center;transform: rotateZ(-45deg);-webkit-transform: rotateZ(-45deg);-moz-transform: rotateZ(-45deg);-ms-transform: rotateZ(-45deg);-o-transform: rotateZ(-45deg);left: -28px;top: 16px;}
 
 .path-btn{display: block;margin: 10px 20px 0 0;text-align: center;background-color: #333;padding: 20px;border-radius: 3px;color: #fff;}
-.path-btn:hover{box-shadow: 1px 1px 1px #76777B;};
+.path-btn:hover{box-shadow: 1px 1px 1px #76777B;}
+
+.form-error{padding: 10px 15px;margin: 0 0 20px 0;background-color: #FAA;border: 1px solid #FF7272;border-radius: 4px;color: #FF3E3E;}
+
+
+
+.comment-content img{margin-right: 5px;cursor: pointer;font-size: 18px;display: inline;height: 18px;width: 18px;margin: 0 .07em;vertical-align: -0.1em;background: none;padding: 0;}
+
+

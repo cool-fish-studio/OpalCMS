@@ -1,44 +1,106 @@
 <% include header %>
+<style type="text/css">
+    .commentlist{}
+    .commentlist .comment{
+            margin: 0 0 1em;
+    }
+    .comment-box{
+        overflow: hidden;
+    padding: 15px;
+    border-radius: 3px;
+    background: #fff;
+    }
+    .comment-meta{    
+
+    overflow: hidden;
+    margin-top: 5px;
+    color: #adb8cc;
+    font-size: 14px;}
+    .comment-user{
+    margin-right: 4px;
+    }
+    .comment-content{
+            position: relative;
+    width: 100%;
+    color: #626773;
+    font-size: 18px;
+    line-height: 30px;
+    }
+</style>
 <div class="respond">
+    <% if (locals.context.messages.meta.length > 0) { %>
+    <div class="respond-title">
+        <p>留言回复</p>
+    </div>
+    <div class="respond-body">
+        <ul class="commentlist">
+            <% locals.context.messages.list.forEach(function(message) { %>
+            <li class="comment">
+                <div class="comment-box">
+                    <div class="comment-content">
+                        <%- message.content = message.content.replace(/\[#em_(\w*)\]/g, '<img src="/images/smilies/$1.png" border="0" />') %>
+                    </div>
+                    <div class="comment-meta">
+                        <span class="comment-user"><%- message.name %></span>
+                        <span class="comment-time">评论于<%- locals.viewHelper.dateFormat(message.createdAt, 'yyyy-MM-dd hh:mm') %></span>
+                    </div>
+                </div>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+    <% } %>
     <div class="respond-title">
         <p>留言请输入昵称和邮箱</p>
     </div>
+    <%
+        var errorObj = {
+            10603: '请输入完整信息，包括昵称，邮箱，内容',
+            10604: '所填邮箱格式不正确',
+            10605: '昵称不能过长'
+        };
+    %>
+    <% if (locals.context.error && locals.context.error.status == 400) { %>
+    <div class="form-error">
+        <%- errorObj[locals.context.error.code] %>
+    </div>
+    <% } %>
     <div class="respond-body">
-        <form method="get" class="">
+        <form method="POST" class="" action="/message">
             <div class="row">
                 <div class="col-sm-6 padding-right-10px">
                     <input class="form-control" type="text" placeholder="请输入您的昵称" name="name">
                 </div>
                 <div class="col-sm-6 padding-left-10px">
-                    <input class="form-control" type="text" placeholder="请输入您的邮箱" name="email">
+                    <input class="form-control" type="text" placeholder="请输入您的邮箱,后期提供评论发送邮件通知功能" name="email">
                 </div>
                 <div class="col-sm-12">
                     <div class="form-comment">
-                        <textarea name="comment" rows="10" tabindex="4" placeholder="请输入您要留言的内容..."></textarea>
+                        <textarea name="content" rows="10" tabindex="4" placeholder="请输入您要留言的内容..." id="messageContent"></textarea>
                         <div class="comment-smilies">
-                            <img src="/images/smilies/1f600.png">
-                            <img src="/images/smilies/1f606.png">
-                            <img src="/images/smilies/1f612.png">
-                            <img src="/images/smilies/1f613.png">
-                            <img src="/images/smilies/1f614.png">
-                            <img src="/images/smilies/1f602.png">
-                            <img src="/images/smilies/1f601.png">
-                            <img src="/images/smilies/1f618.png">
-                            <img src="/images/smilies/1f621.png">
-                            <img src="/images/smilies/1f622.png">
-                            <img src="/images/smilies/1f627.png">
-                            <img src="/images/smilies/1f609.png">
-                            <img src="/images/smilies/1f60a.png">
-                            <img src="/images/smilies/1f60b.png">
-                            <img src="/images/smilies/1f60d.png">
-                            <img src="/images/smilies/1f60e.png">
-                            <img src="/images/smilies/1f61c.png">
-                            <img src="/images/smilies/1f62a.png">
-                            <img src="/images/smilies/1f62d.png">
-                            <img src="/images/smilies/1f605.png">
-                            <img src="/images/smilies/1f339.png">
-                            <img src="/images/smilies/1f44d.png">
-                            <img src="/images/smilies/1f44e.png">
+                            <img src="/images/smilies/1f600.png" alt="1f600">
+                            <img src="/images/smilies/1f606.png" alt="1f606">
+                            <img src="/images/smilies/1f612.png" alt="1f612">
+                            <img src="/images/smilies/1f613.png" alt="1f613">
+                            <img src="/images/smilies/1f614.png" alt="1f614">
+                            <img src="/images/smilies/1f602.png" alt="1f602">
+                            <img src="/images/smilies/1f601.png" alt="1f601">
+                            <img src="/images/smilies/1f618.png" alt="1f618">
+                            <img src="/images/smilies/1f621.png" alt="1f621">
+                            <img src="/images/smilies/1f622.png" alt="1f622">
+                            <img src="/images/smilies/1f627.png" alt="1f627">
+                            <img src="/images/smilies/1f609.png" alt="1f609">
+                            <img src="/images/smilies/1f60a.png" alt="1f60a">
+                            <img src="/images/smilies/1f60b.png" alt="1f60b">
+                            <img src="/images/smilies/1f60d.png" alt="1f60d">
+                            <img src="/images/smilies/1f60e.png" alt="1f60e">
+                            <img src="/images/smilies/1f61c.png" alt="1f61c">
+                            <img src="/images/smilies/1f62a.png" alt="1f62a">
+                            <img src="/images/smilies/1f62d.png" alt="1f62d">
+                            <img src="/images/smilies/1f605.png" alt="1f605">
+                            <img src="/images/smilies/1f339.png" alt="1f339">
+                            <img src="/images/smilies/1f44d.png" alt="1f44d">
+                            <img src="/images/smilies/1f44e.png" alt="1f44e">
                         </div>
                     </div>
                 </div>
@@ -51,4 +113,26 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    $('.comment-smilies img').on('click', function () {
+        var _this = $(this);
+        insertText(document.getElementById('messageContent'), '[#em_' + _this.attr('alt') + ']')
+    });
+    function insertText(obj,str) {  
+        if (document.selection) {  
+            var sel = document.selection.createRange();  
+            sel.text = str;  
+        } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {  
+            var startPos = obj.selectionStart,  
+                endPos = obj.selectionEnd,  
+                cursorPos = startPos,  
+                tmpStr = obj.value;  
+            obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);  
+            cursorPos += str.length;  
+            obj.selectionStart = obj.selectionEnd = cursorPos;  
+        } else {  
+            obj.value += str;  
+        }  
+    } 
+</script>
 <% include footer %>            
