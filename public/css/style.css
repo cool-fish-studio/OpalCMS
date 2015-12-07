@@ -119,6 +119,7 @@ h6{font-size: 12px}
 tbody{color: #797979;}
 .table>tbody>tr:nth-of-type(odd){background-color: #f4f8fb;}
 .table>tbody>tr>td{border-top: 1px solid #ebeff2;padding: 8px;line-height: 1.5;}
+.table>tbody>tr>td img{width: 16px;height: 16px;margin: 0 .07em;vertical-align: -0.1em;}
 .table>thead>tr>th.actions, .table>tbody>tr>td.actions{width: 150px;}
 .table>tbody>tr>td.actions a{padding: 0 5px;}
 

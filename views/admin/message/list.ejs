@@ -10,11 +10,35 @@
     </div>
     <div class="card-content">
         <div class="content-list">
-            暂无功能
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>昵称</th>
+                        <th>内容</th>
+                        <th>创建时间</th>
+                        <th class="actions">管理</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% 
+                        var messages = locals.context.messages.list || [];
+                        messages.forEach(function (message)
+                        { 
+                    %>
+                    <tr>
+                        <td><%- message.name %></td>
+                        <td><%- message.content.replace(/\[#em_(\w*)\]/g, '<img src="/images/smilies/$1.png" border="0" />') %></td>
+                        <td><%- locals.viewHelper.dateFormat(message.createdAt, 'yyyy-MM-dd hh:mm') %></td>
+                        <td class="actions">
+                            <a href="/admin/message/<%- message.id %>/update" class="text-update"><i class="icon-pencil"></i></a>
+                            <a href="/admin/message/<%- message.id %>/remove" class="text-remove"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
         </div>
-        <div class="content-page text-right">
-            
-        </div>
+        <%- include('../includes/pagination', {'url': '/admin/message', 'pagination': locals.context.messages.meta}) %>
     </div>
 </div>
 <% include ../includes/content_footer %>
