@@ -6,9 +6,10 @@ input,textarea{outline: none; resize: none; border: none;}
 .clearfix:after{visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0;}
 .clearfix{*zoom: 1;}
 html{min-height: 100%;position: relative;}
-body{font-family: 'Noto Sans','Helvetica Neue',Helvetica,Arial,sans-serif; margin: 0; overflow-x: hidden; color: #797979; background-color: #f0f2f7;font-size: 14px;}
-.fl{float: left;}
-.fr{float: right;}
+body{
+font:14px/1.5 "Microsoft Yahei", "Hiragino Sans GB", Helvetica, "Helvetica Neue", "微软雅黑", Tahoma, Arial, sans-serif; margin: 0; overflow-x: hidden; color: #797979; background-color: #f0f2f7;font-size: 14px;}
+.fl{float: left!important;}
+.fr{float: right!important;}
 .inline{display: inline;}
 .pr{position: relative;}
 .pa{position: absolute;}
@@ -275,5 +276,25 @@ tbody{color: #797979;}
 
 
 .comment-content img{margin-right: 5px;cursor: pointer;font-size: 18px;display: inline;height: 18px;width: 18px;margin: 0 .07em;vertical-align: -0.1em;background: none;padding: 0;}
+
+.respond-body .card-page{margin: 0 10px 20px 10px;}
+.respond-body .card-page .pagination{margin-top: 10px;}
+.card-page .pagination>li>a,.card-page .pagination>li>span{margin: 0 3px;padding: 0 11px;min-width: 20px;height: 29px;line-height: 30px;background-color:transparent;border:0px;font-size: 14px;  border-bottom: 1px solid transparent;-webkit-transition: border-color 0.2s;-moz-transition: border-color 0.2s;transition: border-color 0.2s;}
+.card-page .pagination>.active>a, .card-page .pagination>.active>span{background-color: #5fbeaa;}
+.card-page .pagination>li>a:hover {border-color: #5fbeaa;color: #5fbeaa;text-decoration: none;}
+
+.card-page .pagination>li>span{color: #c8cdd2;}
+.card-page .pagination>.active>span{color: #fff;}
+
+.card-page .pagination>li:first-child>a,
+.card-page .pagination>li:first-child>span,
+.card-page .pagination>li:last-child>a, 
+.card-page .pagination>li:last-child>span{border-radius: 0px !important;}
+
+.commentlist .comment{margin:0 0 1em}
+.comment-box{overflow:hidden;padding:15px;border-radius:3px;background:#fff}
+.comment-meta{overflow:hidden;margin-top:5px;color:#adb8cc;font-size:14px}
+.comment-user{margin-right:4px}
+.comment-content{position:relative;width:100%;color:#626773;font-size:18px;line-height:30px}
 
 

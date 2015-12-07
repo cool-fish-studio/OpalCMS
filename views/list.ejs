@@ -4,7 +4,6 @@
         <% if (locals.context.contents.meta.total == 0) { %>
         <span class="nodata">暂无内容</span>
         <% } %>
-        <% console.log(locals.context.contents.meta.total) %>
         <ul class="row post-box">
             <% locals.context.contents.list.forEach(function (content) { %>
             <li class="post-list">
@@ -47,6 +46,7 @@
             <% }) %>
             
         </ul>
+        <%- include('./pagination', {'url': '/' + (locals.context.menu !== "index" ? locals.context.menu : ''), 'pagination': locals.context.contents.meta}) %>
     </div>
 </div>
 <% include footer %>

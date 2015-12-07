@@ -1,28 +1,72 @@
-<div class="content-page text-right">
-    <ul class="pagination">
-        <li class="disabled">
+<div class="card-page text-center">
+    <%
+        var currentPage = parseInt(pagination.offset / pagination.limit + 1, 10) || 1;
+        var totalPages = Math.ceil(pagination.total / pagination.limit) || 1;
+        if (totalPages > 1) {
+    %>
+    <ul class="pagination clearfix">
+        <% if (currentPage >= 2) { %>
+        <li>
+            <a href="<%- url %>">首页</a>
+        </li>
+        <li>
+            <a href="<%- url + '?p=' + (currentPage - 1) %>">上一页</a>
+        </li>
+        <% } else { %>
+        <li>
             <span>首页</span>
         </li>
-        <li class="active">
-            <span>1</span>
+        <li>
+            <span>上一页</span>
         </li>
-        <li class="">
-            <a href="#">2</a>
+        <% } %>
+
+        <%
+            var startNum = 1;
+            var endNum = 1;
+            if (totalPages <= 5) {
+                startNum = 1;
+                endNum = totalPages;
+            } else {
+                if (currentPage <= 3) {
+                    startNum = 1;
+                    endNum = 5;
+                } else if (currentPage <= totalPages - 3) {
+                    startNum = currentPage - 2;
+                    endNum = currentPage + 2;
+                } else {
+                    startNum = totalPages - 4;
+                    endNum = totalPages;
+                }
+            }
+            for (var i = startNum; i <= endNum; i++) {
+        %>
+            <% if (currentPage == i) { %>
+                <li class="active">
+                    <span><%- i %></span>
+                </li>
+            <% } else { %>
+                <li class="">
+                    <a href="<%- url + '?p=' + i %>"><%- i %></a>
+                </li>
+            <% } %>
+        <% } %>
+
+        <% if (currentPage < totalPages) { %>
+        <li>
+            <a href="<%- url + '?p=' + (currentPage + 1) %>">下一页</a>
         </li>
-        <li class="">
-            <a href="#">3</a>
+        <li>
+            <a href="<%- url + '?p=' + totalPages %>">尾页</a>
         </li>
-        <li class="">
-            <a href="#">4</a>
+        <% } else { %>
+        <li>
+            <span>下一页</span>
         </li>
-        <li class="">
-            <a href="#">5</a>
+        <li>
+            <span>尾页</span>
         </li>
-        <li class="">
-            <a href="#">6</a>
-        </li>
-        <li class="">
-            <a href="#">尾页</a>
-        </li>
+        <% } %>
     </ul>
+    <% } %>
 </div>
