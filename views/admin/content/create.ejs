@@ -1,5 +1,17 @@
-<% locals.menu = 'admin_content'; %>
-<% include ../../includes/content_header %>
+<% 
+    locals.menu = 'admin_content'; 
+    var content = locals.context.content;
+%>
+<% include ../includes/content_header %>
+<% 
+    var type = locals.context.type;
+    var typeObj = {
+        'plugin': '插件',
+        'work': '作品',
+        'post': '文章'
+    }; 
+    var typeDesc = typeObj[type];
+%>
 <div class="card-box">
     <div class="card-title">
         <div class="row">
@@ -16,10 +28,10 @@
         </div>
     </div>
     <div class="card-content">
-        <form action="/admin/content/post/create" method="POST" enctype='multipart/form-data'>
+        <form action="/admin/content/<%= type %>/create" method="POST" enctype='multipart/form-data'>
             <div class="row form-panel">
-                <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="请输入文章名称" name="title">
+                <div class="col-sm-6 row">
+                    <input class="form-control" type="text" placeholder="请输入<%= typeDesc %>名称" name="title">
                     <input type="file" class="form-control" name="themesImage" accept="image/*" required>
                     <select class="form-control" name="category">
                         <option value="0">请选择类别</option>
@@ -27,6 +39,7 @@
                         <option value="<%- category._id %>"><%= category.name %></option>
                         <% }) %>
                     </select>
+
                     <select class="form-control" name="tag">
                         <option value="0">请选择标签</option>
                         <% locals.context.tags.forEach(function (tag) { %>
@@ -36,21 +49,24 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-description">
-                        <input class="form-control" type="text" placeholder="请输入文章关键字" name="keywords">
-                        <textarea class="form-control" name="discription" rows="10" tabindex="4" placeholder="请输入文章描述"></textarea>
+                        <input class="form-control" type="text" placeholder="请输入<%= typeDesc %>关键字" name="keywords">
+                        <textarea class="form-control" name="discription" rows="10" tabindex="4" placeholder="请输入<%= typeDesc %>描述"></textarea>
                     </div>
                 </div>
                 <div class="col-sm-12">
+                    <input class="form-control" type="text" placeholder="请输入<%= typeDesc %>访问地址" name="previewPath">
+                    <input class="form-control" type="text" placeholder="请输入<%= typeDesc %>下载地址" name="downPath">
+                    <input class="form-control" type="text" placeholder="请输入<%= typeDesc %>仓库地址" name="repositoryPath">
                     <div id="content" class="content-box"></div>
                     <div class="form-input clearfix">
-                        <button class="btn-submit fr" type="submit">创建文章</button>
+                        <button class="btn-submit fr" type="submit">创建<%= typeDesc %></button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<% include ../../includes/content_footer %>
+<% include ../includes/content_footer %>
 <script type="text/javascript">
     $('#content').trumbowyg({
         btnsDef: {
