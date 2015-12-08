@@ -15,6 +15,7 @@ module.exports = {
         URL: 'mongodb://127.0.0.1:27017/opalcms',
     },
     UPLOAD_PATH: './public/images/timthumb',
+    UPLOAD_CONTENT_PATH: './public/images/content',
     ADMIN: {
         USERNAME: '***',
         PASSWORD: '***',
