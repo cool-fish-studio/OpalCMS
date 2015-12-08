@@ -31,3 +31,5 @@ node_modules
 config/config_current.js
 
 public/images/timthumb/
+
+public/images/content/

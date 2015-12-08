@@ -38,7 +38,7 @@ module.exports = {
         ADS_DEFAULT: 10,
         LINKS_DEFAULT: 10,
         CATEGORYS_DEFAULT: 10,
-        CONTENTS_DEFAULT: 10,
+        CONTENTS_DEFAULT: 12,
         MESSAGE_DEFAULT: 10,
     },
     //默认
