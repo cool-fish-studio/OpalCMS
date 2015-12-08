@@ -12,6 +12,11 @@
         'work' : '作品',
         'plugin' : '插件'
     };
+    var errorObj = {
+        10803: '请输入完整信息，包括昵称，邮箱，内容',
+        10804: '所填邮箱格式不正确',
+        10805: '昵称不能过长'
+    };
 %>
 <div class="respond">
     <div class="respond-body article-box">
@@ -51,7 +56,12 @@
                 <div class="respond-title">
                     请输入您要评论的内容...
                 </div>
-                <form method="get" class="">
+                <% if (locals.context.error && locals.context.error.status == 400) { %>
+                <div class="form-error">
+                    <%- errorObj[locals.context.error.code] %>
+                </div>
+                <% } %>
+                <form method="POST" class="" action="/<%- content.type %>/<%- content.id %>">
                     <div class="row">
                         <div class="col-sm-6 padding-right-10px">
                             <input class="form-control" type="text" placeholder="请输入您的昵称" name="name">
@@ -61,28 +71,28 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-comment">
-                                <textarea name="comment" rows="10" tabindex="4" placeholder="请输入您要评论的内容..."></textarea>
+                                <textarea name="content" rows="10" tabindex="4" placeholder="请输入您要评论的内容..." id="messageContent"></textarea>
                                 <div class="comment-smilies">
-                                    <img src="/images/smilies/1f600.png">
-                                    <img src="/images/smilies/1f606.png">
-                                    <img src="/images/smilies/1f612.png">
-                                    <img src="/images/smilies/1f613.png">
-                                    <img src="/images/smilies/1f614.png">
-                                    <img src="/images/smilies/1f602.png">
-                                    <img src="/images/smilies/1f618.png">
-                                    <img src="/images/smilies/1f621.png">
-                                    <img src="/images/smilies/1f627.png">
-                                    <img src="/images/smilies/1f609.png">
-                                    <img src="/images/smilies/1f60a.png">
-                                    <img src="/images/smilies/1f60d.png">
-                                    <img src="/images/smilies/1f60e.png">
-                                    <img src="/images/smilies/1f61c.png">
-                                    <img src="/images/smilies/1f62a.png">
-                                    <img src="/images/smilies/1f62d.png">
-                                    <img src="/images/smilies/1f605.png">
-                                    <img src="/images/smilies/1f339.png">
-                                    <img src="/images/smilies/1f44d.png">
-                                    <img src="/images/smilies/1f44e.png">
+                                    <img src="/images/smilies/1f600.png" alt="1f600">
+                                    <img src="/images/smilies/1f606.png" alt="1f606">
+                                    <img src="/images/smilies/1f612.png" alt="1f612">
+                                    <img src="/images/smilies/1f613.png" alt="1f613">
+                                    <img src="/images/smilies/1f614.png" alt="1f614">
+                                    <img src="/images/smilies/1f602.png" alt="1f602">
+                                    <img src="/images/smilies/1f618.png" alt="1f618">
+                                    <img src="/images/smilies/1f621.png" alt="1f621">
+                                    <img src="/images/smilies/1f627.png" alt="1f627">
+                                    <img src="/images/smilies/1f609.png" alt="1f609">
+                                    <img src="/images/smilies/1f60a.png" alt="1f60a">
+                                    <img src="/images/smilies/1f60d.png" alt="1f60d">
+                                    <img src="/images/smilies/1f60e.png" alt="1f60e">
+                                    <img src="/images/smilies/1f61c.png" alt="1f61c">
+                                    <img src="/images/smilies/1f62a.png" alt="1f62a">
+                                    <img src="/images/smilies/1f62d.png" alt="1f62d">
+                                    <img src="/images/smilies/1f605.png" alt="1f605">
+                                    <img src="/images/smilies/1f339.png" alt="1f339">
+                                    <img src="/images/smilies/1f44d.png" alt="1f44d">
+                                    <img src="/images/smilies/1f44e.png" alt="1f44e">
                                 </div>
                             </div>
                         </div>
@@ -93,6 +103,29 @@
                         </div>
                     </div>
                 </form>
+                <% if (locals.context.comments && locals.context.comments.meta.total > 0) { %>
+                <div class="respond-title" id="commentList">
+                    <p><i> <%- locals.context.comments.meta.total %> 条留言信息</i></p>
+                </div>
+                <div class="respond-body">
+                    <ul class="commentlist">
+                        <% locals.context.comments.list.forEach(function(comment) { %>
+                        <li class="comment">
+                            <div class="comment-box">
+                                <div class="comment-content">
+                                    <%- comment.content.replace(/\[#em_(\w*)\]/g, '<img src="/images/smilies/$1.png" border="0" />') %>
+                                </div>
+                                <div class="comment-meta">
+                                    <span class="comment-user"><%- comment.name %></span>
+                                    <span class="comment-time">评论于<%- locals.viewHelper.dateFormat(comment.createdAt, 'yyyy-MM-dd hh:mm') %></span>
+                                </div>
+                            </div>
+                        </li>
+                        <% }) %>
+                    </ul>
+                    <%- include('./pagination', {'url': '/' + locals.context.menu + '/' + content.id, 'pagination': locals.context.comments.meta, 'anchor': '#commentList'}) %>
+                </div>
+                <% } %>
             </div>
         </div>
         <div class="article-sidebar">
@@ -181,4 +214,26 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('.comment-smilies img').on('click', function () {
+        var _this = $(this);
+        insertText(document.getElementById('messageContent'), '[#em_' + _this.attr('alt') + ']')
+    });
+    function insertText(obj, str) {  
+        if (document.selection) {  
+            var sel = document.selection.createRange();  
+            sel.text = str;  
+        } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {  
+            var startPos = obj.selectionStart,  
+                endPos = obj.selectionEnd,  
+                cursorPos = startPos,  
+                tmpStr = obj.value;  
+            obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);  
+            cursorPos += str.length;  
+            obj.selectionStart = obj.selectionEnd = cursorPos;  
+        } else {  
+            obj.value += str;  
+        }  
+    } 
+</script>
 <% include footer %>

@@ -2,15 +2,16 @@
     <%
         var currentPage = parseInt(pagination.offset / pagination.limit + 1, 10) || 1;
         var totalPages = Math.ceil(pagination.total / pagination.limit) || 1;
+        var anchor = anchor ? anchor : '';
         if (totalPages > 1) {
     %>
     <ul class="pagination clearfix">
         <% if (currentPage >= 2) { %>
         <li>
-            <a href="<%- url %>">首页</a>
+            <a href="<%- url + anchor %>">首页</a>
         </li>
         <li>
-            <a href="<%- url + '?p=' + (currentPage - 1) %>">上一页</a>
+            <a href="<%- url + '?p=' + (currentPage - 1) + anchor %>">上一页</a>
         </li>
         <% } else { %>
         <li>
@@ -47,17 +48,17 @@
                 </li>
             <% } else { %>
                 <li class="">
-                    <a href="<%- url + '?p=' + i %>"><%- i %></a>
+                    <a href="<%- url + '?p=' + i + anchor %>"><%- i %></a>
                 </li>
             <% } %>
         <% } %>
 
         <% if (currentPage < totalPages) { %>
         <li>
-            <a href="<%- url + '?p=' + (currentPage + 1) %>">下一页</a>
+            <a href="<%- url + '?p=' + (currentPage + 1) + anchor %>">下一页</a>
         </li>
         <li>
-            <a href="<%- url + '?p=' + totalPages %>">尾页</a>
+            <a href="<%- url + '?p=' + totalPages + anchor%>">尾页</a>
         </li>
         <% } else { %>
         <li>
