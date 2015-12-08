@@ -129,7 +129,6 @@
             </div>
         </div>
         <div class="article-sidebar">
-            <% if (content.type !== 'post') { %>
             <section>
                 <% if (content.previewPath) { %>
                 <a href="<%- content.previewPath %>" class="path-btn btn-create" target="_blank"><%- contentName[content.type] %>演示</a>
@@ -141,7 +140,6 @@
                 <a href="<%- content.repositoryPath %>" class="path-btn btn-update" target="_blank"><%- contentName[content.type] %>仓库</a>
                 <% } %>
             </section>
-            <% } %>
             <section>
                 <h3><%- contentName[content.type] %>分类</h3>
                 <ul>
